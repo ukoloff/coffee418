@@ -1,13 +1,14 @@
 browserify = require 'browserify'
 opaque = require './opaque'
-c2js = require './coffee2js'
+coffeeify = require 'coffeeify'
+coffeeify.sourceMap = false
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
 
 b = new browserify
   debug: true
   extensions: ['.coffee']
   pack: opaque
-.transform c2js
+.transform coffeeify
 .add './src/main'
 
 b.bundle (err, data)->

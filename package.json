@@ -32,6 +32,7 @@
     "exorcist": "^0.1.6",
     "intreq": "0.0.0",
     "browser-pack": "^3.1.1",
-    "browserify": "^5.11.1"
+    "browserify": "^5.11.1",
+    "coffeeify": "~0.7.0"
   }
 }
