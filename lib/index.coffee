@@ -4,6 +4,7 @@ c2js = require './coffee2js'
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
 
 b = new browserify
+  debug: true
   extensions: ['.coffee']
   pack: opaque
 .transform c2js
