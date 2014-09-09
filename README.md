@@ -12,7 +12,7 @@ npm install coffee418 --save-dev
 Replace the following lines in `package.json`
 ```json
   "scripts": {
-    "test": "node node_modules/coffee418/bin/run"
+    "test": "node node_modules/coffee418"
   }
 
 ```
