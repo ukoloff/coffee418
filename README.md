@@ -14,7 +14,6 @@ Replace the following lines in `package.json`
   "scripts": {
     "test": "node node_modules/coffee418"
   }
-
 ```
 then run
 ```sh
