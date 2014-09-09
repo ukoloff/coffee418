@@ -19,3 +19,8 @@ then run
 ```sh
 npm test [--once]
 ```
+
+## Credits
+
+  * [Browserify](http://browserify.org/)
+  * [CoffeeScript](http://coffeescript.org/)
