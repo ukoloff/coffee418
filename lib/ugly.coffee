@@ -4,8 +4,8 @@ through = require 'through'
 module.exports = ->
   data = ''
   write = (buf)->data+=buf
-  end = -> stream.queue minify data
-  stream = through write, end
+  end = -> @queue minify data
+  through write, end
 
 minify = (s)->
   try
