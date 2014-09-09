@@ -12,6 +12,5 @@ b = new browserify
 
 b.bundle (err, data)->
     if err
-      console.log "Err: #{data}"
-    else
-      console.log "Success: #{data}"
+      console.log "Err: #{err}"
+.pipe process.stdout

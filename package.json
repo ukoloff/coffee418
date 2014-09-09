@@ -2,7 +2,7 @@
   "name": "coffee418",
   "version": "0.0.0",
   "description": "Browserify + CoffeeScript + watchify",
-  "main": "run.js",
+  "main": "lib/run",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
