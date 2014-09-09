@@ -5,7 +5,7 @@ coffeeify = require 'coffeeify'
 coffeeify.sourceMap = false
 exorcist = require 'exorcist'
 sculpt = require 'sculpt'
-uglify = require 'uglify-stream'
+ugly = require './ugly'
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
 
 b = new browserify
@@ -19,6 +19,6 @@ b.bundle (err, data)->
     if err
       console.log "Err: #{err}"
 .pipe exorcist('./map')
-.pipe sculpt.fork(process.stderr)
-.pipe uglify()
-.pipe process.stdout
+.pipe sculpt.fork(fs.createWriteStream '1')
+.pipe ugly()
+.pipe fs.createWriteStream '2'
