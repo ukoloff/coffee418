@@ -18,7 +18,7 @@ b = new browserify
 b.bundle (err, data)->
     if err
       console.log "Err: #{err}"
-.pipe exorcist('./map')
-.pipe sculpt.fork(fs.createWriteStream '1')
+.pipe exorcist('./1.js.map')
+.pipe sculpt.fork(fs.createWriteStream '1.js')
 .pipe ugly()
-.pipe fs.createWriteStream '2'
+.pipe fs.createWriteStream '2.js'
