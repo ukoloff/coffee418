@@ -18,9 +18,8 @@ b = new browserify
 .add './src/main'
 .on 'file', (file, id)-> sources[id] = file
 
-p = b.pipeline.get 'label'
-p.push intreq()
-p.push rename sources
+b.pipeline.get 'label'
+  .push intreq(), rename sources
 
 b.bundle()
 .on('error', (err)->console.log "Error:", err)
