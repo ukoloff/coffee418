@@ -15,6 +15,12 @@ b = new browserify
 .transform coffeeify
 .add './src/main'
 
+p = b.pipeline
+dump = require './dump'
+
+p.get('dedupe').push dump 'dedupe.dump'
+p.get('label').push dump 'label.dump'
+
 b.bundle (err, data)->
     if err
       console.log "Err: #{err}"
