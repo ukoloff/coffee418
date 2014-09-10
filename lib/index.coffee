@@ -5,16 +5,22 @@ coffeeify.sourceMap = false
 intreq = require 'intreq'
 exorcist = require 'exorcist'
 sculpt = require 'sculpt'
+rename =  require './rename'
 ugly = require './ugly'
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
+
+sources = {}
 
 b = new browserify
   debug: true
   extensions: ['.coffee']
 .transform coffeeify
 .add './src/main'
+.on 'file', (file, id)-> sources[id] = file
 
-b.pipeline.get('label').push intreq()
+p = b.pipeline.get 'label'
+p.push intreq()
+p.push rename sources
 
 b.bundle()
 .on('error', (err)->console.log "Error:", err)
