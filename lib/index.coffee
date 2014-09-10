@@ -16,9 +16,8 @@ b = new browserify
 
 b.pipeline.get('label').push intreq()
 
-b.bundle (err, data)->
-    if err
-      console.log "Err: #{err}"
+b.bundle()
+.on('error', (err)->console.log "Error:", err)
 .pipe exorcist('./1.js.map')
 .pipe sculpt.fork(fs.createWriteStream '1.js')
 .pipe ugly()
