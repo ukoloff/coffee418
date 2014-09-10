@@ -17,9 +17,12 @@ b = new browserify
 
 p = b.pipeline
 dump = require './dump'
+intreq = require 'intreq'
 
 p.get('dedupe').push dump 'dedupe.dump'
 p.get('label').push dump 'label.dump'
+p.get('label').push intreq()
+p.get('label').push dump 'intreq.dump'
 
 b.bundle (err, data)->
     if err
