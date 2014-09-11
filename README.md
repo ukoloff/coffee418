@@ -1,6 +1,6 @@
 #coffee418
 
-Browserify + CoffeeScript + watchify
+Browserify + Coffeeify + Uglify + Watchify
 
 # Usage
 
@@ -15,6 +15,12 @@ Replace the following lines in `package.json`
     "test": "node node_modules/coffee418"
   }
 ```
+Add link to main file into `package.json`
+```json
+  },
+  "browser": "src/main"
+```
+
 then run
 ```sh
 npm test [--once]
@@ -24,3 +30,5 @@ npm test [--once]
 
   * [Browserify](http://browserify.org/)
   * [CoffeeScript](http://coffeescript.org/)
+  * [UglifyJS](https://github.com/mishoo/UglifyJS2)
+  * [Hyper Text Coffee Pot Control Protocol](https://ru.wikipedia.org/wiki/HTCPCP)

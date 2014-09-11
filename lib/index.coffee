@@ -15,7 +15,7 @@ b = new browserify
   debug: true
   extensions: ['.coffee']
 .transform coffeeify
-.add './src/main'
+.add '.'
 .on 'file', (file, id)-> sources[id] = file
 
 b.pipeline.get 'label'
