@@ -10,23 +10,38 @@ ugly = require './ugly'
 mkpaths = require './mkpaths'
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
 
-sources = {}
+do build = ->
+  sources = {}
+  files = []
 
-b = new browserify
-  debug: true
-  extensions: ['.coffee']
-.transform coffeeify
-.add '.'
-.on 'file', (file, id)-> sources[id] = file
+  listen = (file)->
+    chokidar.watch file,
+      persistent: true
+      ignoreInitial: true
+    .on 'all', (e, f)->
+      files.forEach (z)-> z.close()
+      files = []
+      process.nextTick build
+      console.log new Date().toLocaleTimeString(), "Fired #{e} on #{f}..."
 
-b.pipeline.get 'label'
-  .push intreq(), rename sources
+  console.log 'Rebuilding...'
+  b = new browserify
+    debug: true
+    extensions: ['.coffee']
+  .transform coffeeify
+  .add '.'
+  .on 'file', (file, id)->
+    sources[id] = file
+    files.push listen file if watch
 
-paths = do mkpaths
+  b.pipeline.get 'label'
+    .push intreq(), rename sources
 
-b.bundle()
-.on('error', (err)->console.log "Error:", err.annotated or err.message)
-.pipe exorcist(paths.debug+'.map')
-.pipe sculpt.fork(fs.createWriteStream paths.debug)
-.pipe ugly()
-.pipe fs.createWriteStream paths.out
+  paths = do mkpaths
+
+  b.bundle()
+  .on('error', (err)->console.log "Error:", err.annotated or err.message)
+  .pipe exorcist(paths.debug+'.map')
+  .pipe sculpt.fork(fs.createWriteStream paths.debug)
+  .pipe ugly()
+  .pipe fs.createWriteStream paths.out
