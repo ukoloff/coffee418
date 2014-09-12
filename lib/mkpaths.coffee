@@ -12,8 +12,6 @@ module.exports = (ext = '.js')->
   name ||= path.basename path.resolve '.'
   name ||= 'bundle'
 
-  console.log "name=#{name}"
-
   r =
     out:   path.resolve name+ext
     debug: path.resolve 'tmp', name+ext
