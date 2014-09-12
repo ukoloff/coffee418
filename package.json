@@ -26,11 +26,12 @@
   "dependencies": {
     "through": "^2.3.4",
     "sculpt": "^0.1.4",
-    "coffeeify": "^0.7.0",
     "coffee-script": "^1.8.0",
-    "chokidar": "^0.8.4",
-    "intreq": "0.0.0",
+    "coffeeify": "^0.7.0",
     "uglify-js": "^2.4.15",
+    "mkdirp": "^0.5.0",
+    "intreq": "0.0.0",
+    "chokidar": "^0.8.4",
     "exorcist": "^0.1.6",
     "browserify": "^5.11.1"
   }
