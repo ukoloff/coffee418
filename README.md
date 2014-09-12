@@ -1,5 +1,7 @@
 #coffee418
 
+[![NPM version](https://badge.fury.io/js/coffee418.svg)](http://badge.fury.io/js/coffee418)
+
 Browserify + Coffeeify + Uglify + Watchify
 
 # Usage
@@ -25,6 +27,8 @@ then run
 ```sh
 npm test [--once]
 ```
+
+You don't even need to `require('coffee-script')` to develop using CoffeeScript :-)
 
 ## Credits
 
