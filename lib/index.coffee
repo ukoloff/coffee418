@@ -22,7 +22,7 @@ b.pipeline.get 'label'
   .push intreq(), rename sources
 
 b.bundle()
-.on('error', (err)->console.log "Error:", err)
+.on('error', (err)->console.log "Error:", err.annotated or err.message)
 .pipe exorcist('./1.js.map')
 .pipe sculpt.fork(fs.createWriteStream '1.js')
 .pipe ugly()
