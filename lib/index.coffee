@@ -24,7 +24,10 @@ do build = ->
       process.nextTick build
       console.log new Date().toLocaleTimeString(), "Fired #{e} on #{f}..."
 
-  console.log 'Rebuilding...'
+  paths = do mkpaths
+  console.log "Rebuilding #{paths.out}..."
+  start = new Date
+
   b = new browserify
     debug: true
     extensions: ['.coffee']
@@ -37,7 +40,6 @@ do build = ->
   b.pipeline.get 'label'
     .push intreq(), rename sources
 
-  paths = do mkpaths
 
   b.bundle()
   .on('error', (err)->console.log "Error:", err.annotated or err.message)
@@ -45,3 +47,5 @@ do build = ->
   .pipe sculpt.fork(fs.createWriteStream paths.debug)
   .pipe ugly()
   .pipe fs.createWriteStream paths.out
+  .on 'finish', ->
+    console.log "Done (#{((new Date - start)/1000).toFixed(3).replace(/[.]0*$/, '')}s)"
