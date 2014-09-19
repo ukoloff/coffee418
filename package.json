@@ -4,7 +4,7 @@
   "description": "Browserify + Coffeeify + Uglify + Watchify",
   "main": "lib/run",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -34,5 +34,9 @@
     "chokidar": "^0.8.4",
     "exorcist": "^0.1.6",
     "browserify": "^5.11.1"
+  },
+  "devDependencies": {
+    "should": "~4.0.4",
+    "mocha": "~1.21.4"
   }
 }
