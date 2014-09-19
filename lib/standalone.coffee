@@ -16,7 +16,7 @@ N = 0
   console.log "Done (#{((new Date - start)/1000).toFixed(3).replace(/[.]0*$/, '')}s)"
 
 @error = (err)->
-  console.log "Error:", err.annotated or err.message
+  console.error "Error:", err.annotated or err.message
 
 @change = (e, f)->
   console.log new Date().toLocaleTimeString(), "Fired #{e} on #{f}..."
