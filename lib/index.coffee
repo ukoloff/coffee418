@@ -10,7 +10,7 @@ ugly = require './ugly'
 mkpaths = require './mkpaths'
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
 
-module.exports = build = ->
+module.exports = build = (options = {})->
   sources = {}
   files = []
 
@@ -21,12 +21,11 @@ module.exports = build = ->
     .on 'all', (e, f)->
       files.forEach (z)-> z.close()
       files = []
-      process.nextTick build
-      console.log new Date().toLocaleTimeString(), "Fired #{e} on #{f}..."
+      process.nextTick -> build options
+      options?.change e, f
 
   paths = do mkpaths
-  console.log "Rebuilding #{paths.out}..."
-  start = new Date
+  options.start?()
 
   b = new browserify
     debug: true
@@ -41,12 +40,11 @@ module.exports = build = ->
     .push intreq(), rename sources
 
   b.bundle()
-  .on('error', (err)->console.log "Error:", err.annotated or err.message)
+  .on('error', (err)->options.error? err)
   .pipe exorcist(paths.debug+'.map')
   .pipe sculpt.fork(fs.createWriteStream paths.debug)
   .pipe ugly()
   .pipe fs.createWriteStream paths.out
-  .on 'finish', ->
-    console.log "Done (#{((new Date - start)/1000).toFixed(3).replace(/[.]0*$/, '')}s)"
+  .on 'finish', -> options.success?()
 
   return
