@@ -10,7 +10,7 @@ ugly = require './ugly'
 mkpaths = require './mkpaths'
 chokidar = require 'chokidar' if watch = !process.env.npm_config_once
 
-do build = ->
+module.exports = build = ->
   sources = {}
   files = []
 
@@ -40,7 +40,6 @@ do build = ->
   b.pipeline.get 'label'
     .push intreq(), rename sources
 
-
   b.bundle()
   .on('error', (err)->console.log "Error:", err.annotated or err.message)
   .pipe exorcist(paths.debug+'.map')
@@ -49,3 +48,5 @@ do build = ->
   .pipe fs.createWriteStream paths.out
   .on 'finish', ->
     console.log "Done (#{((new Date - start)/1000).toFixed(3).replace(/[.]0*$/, '')}s)"
+
+  return
