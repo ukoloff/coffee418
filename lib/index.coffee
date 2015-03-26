@@ -8,7 +8,7 @@ sculpt = require 'sculpt'
 rename =  require './rename'
 ugly = require './ugly'
 mkpaths = require './mkpaths'
-chokidar = require 'chokidar' if watch = !process.env.npm_config_once
+chokidar = require 'chokidar'
 
 module.exports = build = (options = {})->
   sources = {}
@@ -22,7 +22,7 @@ module.exports = build = (options = {})->
       files.forEach (z)-> z.close()
       files = []
       process.nextTick -> build options
-      options?.change e, f
+      options.change? e, f
 
   paths = do mkpaths
   options.start?()
@@ -34,7 +34,7 @@ module.exports = build = (options = {})->
   .add '.'
   .on 'file', (file, id)->
     sources[id] = file
-    files.push listen file if watch
+    files.push listen file if options.watch
 
   b.pipeline.get 'label'
     .push intreq(), rename sources
