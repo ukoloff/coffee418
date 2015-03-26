@@ -48,3 +48,6 @@ module.exports = build = (options = {})->
   .on 'finish', -> options.success?()
 
   return
+
+build.defaults = ->
+  require './standalone'
