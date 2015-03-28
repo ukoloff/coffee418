@@ -1,10 +1,10 @@
-#coffee418
+# coffee418
 
 [![NPM version](https://badge.fury.io/js/coffee418.svg)](http://badge.fury.io/js/coffee418)
 
 Browserify + Coffeeify + Uglify + Watchify
 
-# Usage
+## Usage
 
 ```sh
 npm init
